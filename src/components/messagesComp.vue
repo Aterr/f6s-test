@@ -2,9 +2,9 @@
   <div class="messages" ref="msgContainer">
     <div
       class="message-wrapper"
-      v-for="(message, i) in data"
+      v-for="(message, i) in $store.state.messages"
       :key="`message-${i}`"
-      :class="message.from.id === currentUser.id ? 'self' : ''"
+      :class="message.from.id === $store.state.currentUser.id ? 'self' : ''"
     >
       <img
         :src="message.from.thumbnail"
@@ -21,19 +21,6 @@
 <script>
 export default {
   name: "Chat",
-  props: {
-    data: {
-      type: Array,
-      default: [],
-    },
-    currentUser: {
-      type: Object,
-      required: true,
-    },
-  },
-  data() {
-    return {};
-  },
   updated() {
     this.scrollToBottom();
   },

@@ -30,10 +30,11 @@ export default {
   methods: {
     sendMessage() {
       const message = {
+        from: this.$store.state.currentUser,
         message: this.message,
         date: new Date().toLocaleString(),
       };
-      this.$emit("sendMessage", message);
+      this.$store.commit("SET_NEW_MESSAGE", message);
       this.message = "";
     },
   },

@@ -1,7 +1,7 @@
 <template>
   <div class="chat">
-    <Messages :data="conversation" :currentUser="currentUser" />
-    <SendMessage @sendMessage="sendMessage" />
+    <Messages />
+    <SendMessage />
   </div>
 </template>
 
@@ -9,7 +9,6 @@
 // @ is an alias to /src
 import Messages from "@/components/messagesComp";
 import SendMessage from "@/components/sendMessagesComp";
-import { currentUser, conversation } from "@/data/mockup.js";
 
 export default {
   name: "Chat",
@@ -17,25 +16,8 @@ export default {
     Messages,
     SendMessage,
   },
-  data() {
-    return {
-      currentUser: JSON.parse(currentUser),
-      conversation: JSON.parse(conversation),
-    };
-  },
-  methods: {
-    sendMessage(e) {
-      const obj = {
-        message: e.message,
-        date: e.date,
-        from: this.currentUser,
-      };
-      this.conversation.push(obj);
-
-      console.log(obj);
-
-      console.log(this.conversation);
-    },
+  mounted() {
+    this.$store.dispatch("GET_INFO");
   },
 };
 </script>
